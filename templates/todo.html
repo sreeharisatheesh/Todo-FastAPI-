@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TODO List</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f8fa;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .todo-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            width: 500px;
+            max-width: 90%;
+        }
+
+        h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #2c3e50;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .add-form {
+            display: flex;
+            margin-bottom: 20px;
+            gap: 10px;
+        }
+
+        .add-form input {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .add-form input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .add-form button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .add-form button:hover {
+            background-color: #2980b9;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .task-text {
+            flex: 1;
+            word-break: break-word;
+        }
+
+        .delete-form button {
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 10px;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .delete-form button:hover {
+            background-color: #27ae60;
+        }
+
+        .logout-link {
+            display: block;
+            margin-top: 20px;
+            color: #e74c3c;
+            text-decoration: none;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="todo-container">
+        <h2>Your TODO List</h2>
+
+        <form method="post" class="add-form">
+            <input name="task" placeholder="New Task" required>
+            <button type="submit">Add</button>
+        </form>
+
+        <ul>
+            {% for todo in todos %}
+            <li>
+                <span class="task-text">{{ todo.task }}</span>
+                <form method="post" action="/delete/{{ todo.id }}" class="delete-form">
+                    <button type="submit">Completed</button>
+                </form>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <a href="/logout" class="logout-link">Logout</a>
+    </div>
+</body>
+
+</html>
